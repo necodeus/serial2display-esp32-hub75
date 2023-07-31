@@ -4,35 +4,46 @@
 
 Simple program for controlling RGB display via TTY
 
-Inspired by https://github.com/kconger/MiSTer_web2rgbmatrix
+Inspired by <https://github.com/kconger/MiSTer_web2rgbmatrix>
 
 ## Commands
 
-Displays a list of files and directories in mounted SD Card
+### 1. Listing files
 
 ```bash
 /ls /
 ```
-Sets the time on the clock
+
+Displays a list of files and directories in mounted SD Card
+
+### 2. Setting the time
 
 ```bash
 /time 22 3 0 31 7 2023 
 ```
 
-Displays the time in the form of a tetris game
+Sets the time on the clock
+
+### 3. Displaying the time
 
 ```bash
 /tetris
 ```
 
-Displays GIF from mounted SD Card
+Displays the time in the form of a tetris game
+
+### 4. Displaying GIF
 
 ```bash
 /gif /path/to/gif
 ```
 
-Displays a rainbow animated text
+Displays GIF from mounted SD Card
+
+### 5. Displaying text
 
 ```bash
 /rainbow
 ```
+
+Displays a rainbow animated text
