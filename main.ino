@@ -8,10 +8,10 @@
 #include <SD.h>
 
 #define E 18
-#define B1 26
-#define B2 12
-#define G1 27
-#define G2 13
+#define B1 27
+#define B2 13
+#define G1 26
+#define G2 12
 #define R1 25
 #define R2 14
 
@@ -42,15 +42,13 @@ uint16_t myYELLOW = matrix_display->color565(255, 255, 0);
 uint16_t myMAGENTA = matrix_display->color565(255, 0, 255);
 uint16_t myCYAN = matrix_display->color565(0, 255, 255);
 
-const int panelResX = 64;
+const int panelResX = 128;
 const int panelResY = 32;
 const int panels_in_X_chain = 1;
 const int panels_in_Y_chain = 1;
 const int totalWidth = panelResX * panels_in_X_chain;
 const int totalHeight = panelResY * panels_in_Y_chain;
 int16_t xPos = 0, yPos = 0;
-
-bool config_display_on = true;
 
 String th_filePath = "";
 bool allowPlaying = true;
@@ -86,8 +84,8 @@ bool showColon = true;
 volatile bool finishedAnimating = false;
 String lastDisplayedTime = "";
 String lastDisplayedAmPm = "";
-const int tetrisYOffset = (totalHeight) / 2;
-const int tetrisXOffset = 0;
+const int tetrisYOffset = totalHeight / 2;
+const int tetrisXOffset = panelResX / 2;
 
 void animationHandler() {
   if (!finishedAnimating) {
@@ -596,8 +594,11 @@ void GIFDraw(GIFDRAW *pDraw) {
     }
   } else {
     s = pDraw->pPixels;
-    for (x = 0; x < pDraw->iWidth; x++)
+
+    for (x = 0; x < pDraw->iWidth; x++) {
       usTemp[x] = usPalette[*s++];
+    }
+
     span(usTemp, xPos + pDraw->iX, screenY, pDraw->iWidth);
   }
 }
@@ -606,10 +607,12 @@ void *GIFOpenFile(const char *fname, int32_t *pSize) {
   Serial.print("Playing gif: ");
   Serial.println(fname);
   gif_file = LittleFS.open(fname);
+
   if (gif_file) {
     *pSize = gif_file.size();
     return (void *)&gif_file;
   }
+
   return NULL;
 }
 
@@ -617,17 +620,21 @@ void *GIFSDOpenFile(const char *fname, int32_t *pSize) {
   Serial.print("Playing gif from SD: ");
   Serial.println(fname);
   gif_file = SD.open(fname);
+
   if (gif_file) {
     *pSize = gif_file.size();
     return (void *)&gif_file;
   }
+
   return NULL;
 }
 
 void GIFCloseFile(void *pHandle) {
   File *gif_file = static_cast<File *>(pHandle);
-  if (gif_file != NULL)
+
+  if (gif_file != NULL) {
     gif_file->close();
+  }
 }
 
 int32_t GIFReadFile(GIFFILE *pFile, uint8_t *pBuf, int32_t iLen) {
@@ -635,10 +642,14 @@ int32_t GIFReadFile(GIFFILE *pFile, uint8_t *pBuf, int32_t iLen) {
   iBytesRead = iLen;
   File *gif_file = static_cast<File *>(pFile->fHandle);
 
-  if ((pFile->iSize - pFile->iPos) < iLen)
+  if ((pFile->iSize - pFile->iPos) < iLen) {
     iBytesRead = pFile->iSize - pFile->iPos - 1;
-  if (iBytesRead <= 0)
+  }
+
+  if (iBytesRead <= 0) {
     return 0;
+  }
+
   iBytesRead = (int32_t)gif_file->read(pBuf, iBytesRead);
   pFile->iPos = gif_file->position();
   return iBytesRead;
