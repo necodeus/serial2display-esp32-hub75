@@ -8,7 +8,9 @@ Inspired by https://github.com/kconger/MiSTer_web2rgbmatrix
 
 ## Commands
 
-Displays a list of files in the directory
+Displays a list of files and directories in mounted SD Card
+
+```bash
 
 ```bash
 /ls /
@@ -25,7 +27,7 @@ Displays the time in the form of a tetris game
 /tetris
 ```
 
-Displays GIF from mounted storage
+Displays GIF from mounted SD Card
 
 ```bash
 /gif /path/to/gif
