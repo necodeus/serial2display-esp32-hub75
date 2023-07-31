@@ -1,10 +1,10 @@
-# Serial 2 RGB
+# serial2display
 
 ## Description
 
 Simple program for controlling RGB display via TTY
 
-Based on https://github.com/kconger/MiSTer_web2rgbmatrix
+Inspired by https://github.com/kconger/MiSTer_web2rgbmatrix
 
 ## Commands
 
