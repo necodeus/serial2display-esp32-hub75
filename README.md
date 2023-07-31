@@ -11,8 +11,6 @@ Inspired by https://github.com/kconger/MiSTer_web2rgbmatrix
 Displays a list of files and directories in mounted SD Card
 
 ```bash
-
-```bash
 /ls /
 ```
 Sets the time on the clock
