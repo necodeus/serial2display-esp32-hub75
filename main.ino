@@ -294,8 +294,6 @@ void loop(void) {
   } else if (cmd == "/rainbow") {
     hideClock();
     stopGif();
-    Serial.println("Drawing rainbow");
-    showText();
     matrix_display->clearScreen();
     // ///////////////////////////////////////////////////
   } else if (cmd.startsWith("/gif")) {
@@ -399,25 +397,6 @@ bool text = false;
 
 void TextThread(void *parameter) {
   while (true) {
-    milliseconds = millis();
-
-    if (!text) {
-      delay(1);
-      continue;
-    }
-
-    if (milliseconds - previousMillidecondsKnob < knobMillisecondInterval) {
-      delay(1);
-      continue;
-    }
-
-    previousMillidecondsKnob = milliseconds;
-    drawBorderRainbow(2, 64);
-    printTextRainbow(wheelval, "COIN-OP ARCADE HEAVEN", 1, 1);
-    scrollText(wheelval, "TESTING MODIFIED ESP32 WEB2RGBMATRIX CODE WITH BATOCERA ON ASUS CHROMEBOX i7");
-    printTextRainbow(wheelval, "RETRO ARCADE PARADISE", 2, 24);
-    wheelval += 4;
-
     delay(1);
   }
 }
