@@ -40,10 +40,3 @@ Displays the time in the form of a tetris game
 
 Displays GIF from mounted SD Card
 
-### 5. Displaying text
-
-```bash
-/rainbow
-```
-
-Displays a rainbow animated text
